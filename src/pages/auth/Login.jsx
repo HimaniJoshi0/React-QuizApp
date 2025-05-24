@@ -67,9 +67,11 @@ const Login = () => {
       </div>
       <div className="h-full w-full px-4 md:px-10 flex flex-col flex-1">
         <div className="flex flex-col gap-4 justify-center items-center h-full w-full">
+          {/* Added heading */}
+          <h2 className="text-3xl font-bold text-white mb-4">Welcome Back</h2>
           <form
             onSubmit={handleSubmit(handleRegisterSubmit)}
-            className="flex flex-col gap-4 w-full px-4 md:px-10"
+            className="flex flex-col gap-6 w-full px-4 md:px-10"
           >
             <Input
               label="Email"
@@ -83,19 +85,23 @@ const Login = () => {
               validations={register("password")}
               error={!!errors.password}
               helperText={errors?.password?.message || ""}
+              type="password"
             />
-
-            <CommonButton
-              title="Login"
-              onclick={handleSubmit(handleRegisterSubmit)}
-              classes="mt-3 bg-gray-700 border-2 border-white p-2 rounded-md"
-              variant="contained"
-              type="submit"
-            />
+            <div className="mt-4 w-full">
+              <CommonButton
+                title="Login"
+                onclick={handleSubmit(handleRegisterSubmit)}
+                classes="mt-2 w-full"
+                variant="contained"
+                type="submit"
+              />
+            </div>
           </form>
-          <span>
+          <span className="text-white">
             Don&apos;t have an account?{" "}
-            <Link to="/register">Register here</Link>
+            <Link to="/register" className="text-primary">
+              Register here
+            </Link>
           </span>
         </div>
       </div>

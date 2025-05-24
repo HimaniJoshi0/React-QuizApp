@@ -1,5 +1,7 @@
-import React from "react";
-import { TextField } from "@mui/material";
+import React, { useState } from "react";
+import { TextField, InputAdornment, IconButton } from "@mui/material";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const Input = ({
   id,
@@ -9,6 +11,16 @@ const Input = ({
   helperText,
   type = "text",
 }) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <TextField
       error={error}
@@ -17,28 +29,39 @@ const Input = ({
       label={label}
       variant="standard"
       {...validations}
-      type={type}
+      type={type === "password" ? (showPassword ? "text" : "password") : type}
       sx={{
         background: "",
         "& .MuiInputBase-input": {
-          // Style for the input text
-          color: "white", // Set input text color to white
+          color: "white",
         },
         "& .MuiInputLabel-root": {
-          // Style for the label
-          color: "white", // Set label color to white
+          color: "white",
         },
         "& .MuiInput-underline:before": {
-          // Style for the standard variant underline before focus
-          borderBottomColor: "rgba(255, 255, 255, 0.6)", // Light grey underline
+          borderBottomColor: "rgba(255, 255, 255, 0.6)",
         },
         "& .MuiInput-underline:hover:not(.Mui-disabled):before": {
-          // Style for the underline on hover
           borderBottomColor: "white", // White underline on hover
         },
         "& .MuiFormHelperText-root": {
           color: "rgba(255, 255, 255, 0.7)",
         },
+      }}
+      InputProps={{
+        endAdornment: type === "password" && (
+          <InputAdornment position="end">
+            <IconButton
+              aria-label="toggle password visibility"
+              onClick={handleClickShowPassword}
+              onMouseDown={handleMouseDownPassword}
+              edge="end"
+              sx={{ color: 'white' }} // Style the icon color
+            >
+              {showPassword ? <VisibilityOff /> : <Visibility />}
+            </IconButton>
+          </InputAdornment>
+        ),
       }}
     />
   );
