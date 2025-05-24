@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 
 // Create Axios instance
 const axiosClient = axios.create({
-  baseURL: 'https://api.erecat.com', // Replace with your actual API base URL
+  baseURL: 'https://quizzapp-ai.vercel.app', // Replace with your actual API base URL
   headers: {
     'Content-Type': 'application/json',
   },

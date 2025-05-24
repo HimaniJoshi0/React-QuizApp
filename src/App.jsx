@@ -6,7 +6,7 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-  <div className="h-20 bg-red-200">
+  <div className="">
     <AppRoutes/>
   </div>
   )
