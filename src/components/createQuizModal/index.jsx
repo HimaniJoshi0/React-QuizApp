@@ -33,13 +33,17 @@ const CreateQuizModal = ({ open, handleClose }) => {
     setLoading(true);
     try {
       const resp = await apiRequest({
-        method: 'POST',
-        path: '/quiz/create',
-        data: data,
+        method: "POST",
+        path: "/quiz/create",
+        data: {
+          ...data,
+          numberOfQuestions: +data.numberOfQuestions,
+          timeLimit: +data.timeLimit,
+        },
       });
       setLoading(false);
-      if (resp.data && resp.data.id) {
-        navigate(`/quiz/${resp.data.id}`);
+      if (resp.quiz && resp.quiz.id) {
+        navigate(`/quiz/${resp.quiz.id}`);
         handleClose(); // Close modal after successful creation and navigation
       } else {
         console.error("API response did not contain quiz ID:", resp);
@@ -87,8 +91,17 @@ const CreateQuizModal = ({ open, handleClose }) => {
           </Typography>
           {loading ? (
             // Attractive AI loading indicator (replace with your actual component/styling)
-            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px' }}>
-              <Typography variant="h6" className="text-white">Creating Quiz...</Typography>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "200px",
+              }}
+            >
+              <Typography variant="h6" className="text-white">
+                Creating Quiz...
+              </Typography>
               {/* Add your loading spinner or animation here */}
             </Box>
           ) : (
@@ -142,7 +155,9 @@ const CreateQuizModal = ({ open, handleClose }) => {
                 error={!!errors.level}
                 // Add dark theme styling overrides
                 sx={{
-                  "& .MuiInputLabel-root": { color: "rgba(255, 255, 255, 0.7)" },
+                  "& .MuiInputLabel-root": {
+                    color: "rgba(255, 255, 255, 0.7)",
+                  },
                   "& .MuiInputBase-root": { color: "white" },
                   "& .MuiOutlinedInput-notchedOutline": {
                     borderColor: "rgba(255, 255, 255, 0.3)",
@@ -246,7 +261,10 @@ const CreateQuizModal = ({ open, handleClose }) => {
                 control={control}
                 rules={{
                   required: "Number of Questions is required",
-                  min: { value: 1, message: "Number of Questions must be at least 1" },
+                  min: {
+                    value: 1,
+                    message: "Number of Questions must be at least 1",
+                  },
                   pattern: {
                     value: /^[0-9]*$/,
                     message: "Number of Questions must be a number",

@@ -83,7 +83,7 @@ const Quiz = () => {
   )
 
   const handleOpenModal = () => {
-    const token = getCookie('your_auth_token_name'); // Replace 'your_auth_token_name' with your actual cookie name
+    const token = getCookie('auth_token'); // Replace 'your_auth_token_name' with your actual cookie name
     if (token) {
       setIsModalOpen(true);
     } else {
