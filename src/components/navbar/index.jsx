@@ -1,37 +1,41 @@
-import React, { useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { Navdata } from '../../data'
-import { Logo } from '../../assets/icons'
-import MenuIcon from '@mui/icons-material/Menu'
-import CloseIcon from '@mui/icons-material/Close'
-import LoginIcon from '@mui/icons-material/Login'
-import Cookies from 'js-cookie';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import LogoutIcon from '@mui/icons-material/Logout';
+import React, { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Navdata } from "../../data";
+import { Logo } from "../../assets/icons";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import LoginIcon from "@mui/icons-material/Login";
+import Cookies from "js-cookie";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const Navbar = () => {
-  const location = useLocation()
+  const location = useLocation();
   const navigate = useNavigate();
-  const currentRoute = location.pathname
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const currentRoute = location.pathname;
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const isAuthenticated = Cookies.get('auth_token');
+  const isAuthenticated = Cookies.get("auth_token");
 
   const handleLogout = () => {
-    Cookies.remove('auth_token');
-    navigate('/login');
+    Cookies.remove("auth_token");
+    navigate("/login");
   };
 
   const renderHeader = (item, index) => (
     <div key={index}>
       <Link
         to={item.link}
-        className={`transition-all duration-300 px-4 py-2 rounded-lg hover:bg-white/10 ${currentRoute === item.link ? 'bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] text-white' : 'text-gray-300'}`}
+        className={`transition-all duration-300 px-4 py-2 rounded-lg hover:bg-white/10 ${
+          currentRoute === item.link
+            ? "bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] text-white"
+            : "text-gray-300"
+        }`}
       >
         {item.title}
       </Link>
     </div>
-  )
+  );
 
   return (
     <>
@@ -84,10 +88,14 @@ const Navbar = () => {
 
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="fixed inset-0 bg-[#0A0F1C]/95 backdrop-blur-xl z-50 md:hidden">
+          <div className="fixed inset-0 bg-[#0A0F1C]/95 h-screen backdrop-blur-xl z-50 md:hidden">
             <div className="flex flex-col h-full p-6">
               <div className="flex justify-between items-center mb-8">
-                <Link to="/" className="flex items-center space-x-2" onClick={() => setIsMenuOpen(false)}>
+                <Link
+                  to="/"
+                  className="flex items-center space-x-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
                   <Logo height="40" width="40" />
                   <span className="text-xl font-bold bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] text-transparent bg-clip-text">
                     QuizAI
@@ -106,7 +114,11 @@ const Navbar = () => {
                   <Link
                     key={index}
                     to={item.link}
-                    className={`text-lg transition-all duration-300 px-6 py-3 rounded-lg w-full text-center hover:bg-white/10 ${currentRoute === item.link ? 'bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] text-white' : 'text-gray-300'}`}
+                    className={`text-lg transition-all duration-300 px-6 py-3 rounded-lg w-full text-center hover:bg-white/10 ${
+                      currentRoute === item.link
+                        ? "bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] text-white"
+                        : "text-gray-300"
+                    }`}
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.title}
@@ -118,7 +130,10 @@ const Navbar = () => {
                   <>
                     <AccountCircleIcon className="w-8 h-8 text-white" />
                     <button
-                      onClick={() => { handleLogout(); setIsMenuOpen(false); }}
+                      onClick={() => {
+                        handleLogout();
+                        setIsMenuOpen(false);
+                      }}
                       className="flex items-center justify-center p-3 rounded-lg w-full transition-all duration-300 hover:bg-white/10 text-gray-300 hover:text-white"
                     >
                       <LogoutIcon className="w-6 h-6" />
@@ -140,7 +155,7 @@ const Navbar = () => {
         )}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
