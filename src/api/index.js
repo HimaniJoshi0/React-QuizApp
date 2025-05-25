@@ -27,6 +27,17 @@ axiosClient.interceptors.response.use(
   (response) => response.data,
   (error) => {
     console.error("API Error:", error.response || error.message);
+    // Check for 401 status code
+    if (error.response && error.response.status === 401) {
+      console.log("401 Unauthorized: Clearing token and redirecting to login.");
+      // Clear the auth_token cookie
+      Cookies.remove("auth_token");
+      // Redirect to the login page
+      // Note: This assumes you are in a browser environment with access to window
+      if (typeof window !== 'undefined') {
+        window.location.href = '/login'; // Adjust the login path if necessary
+      }
+    }
     return Promise.reject(error);
   }
 );
