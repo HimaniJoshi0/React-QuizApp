@@ -45,40 +45,34 @@ const Register = () => {
   }
 
   return (
-    <div
-      className="grid md:grid-cols-2 w-screen place-items-center h-screen"
-      // Removed the linear gradient style
-      // style={{
-      //   backgroundImage:
-      //     'linear-gradient(90deg, #70ACD4, #9BBCEE, #A8CAE8, #4882E6, #245595, #70ACD4)',
-      // }}
-    >
-      {/* Added the background image section from Login.jsx */}
-      <div className="hidden md:flex h-screen w-full  relative">
-         <div className="absolute w-full h-full top-0 left-0 bg-black/70 z-20"></div>
-         <div className="absolute w-full p-4  top-0 left-0 z-30 flex justify-between items-center">
-           <Logo height="60" width="60" />
-           <div className="bg-white/40 px-2 py-1 rounded-full w-fit text-white">
-             Continue to site
-           </div>
-         </div>
-         <img
-           src={Banner}
-           alt="auth"
-           className="w-full object-cover rounded-3xl"
-         />
-       </div>
+    <div className="grid md:grid-cols-2 w-screen place-items-center h-screen bg-[#0A0F1C] relative overflow-hidden">
+      {/* Background glow */}
+      <div className="absolute top-1/3 right-1/3 w-[400px] h-[400px] bg-[#144d6e7a] opacity-10 blur-[100px] rounded-full" />
+      <div className="absolute bottom-1/3 left-1/3 w-[300px] h-[300px] bg-[#00A3FF] opacity-5 blur-[80px] rounded-full" />
 
-      {/* Updated the form container section */}
-      <div className="h-full w-full px-4 md:px-10 flex flex-col flex-1">
-        {/* Removed the Home link */}
-        {/* <Link to="/">Home</Link> */}
+      {/* Banner section */}
+      <div className="hidden md:flex h-screen w-full relative">
+        <div className="absolute w-full h-full top-0 left-0 bg-gradient-to-r bg-black/60 z-20"></div>
+        <div className="absolute w-full p-4 top-0 left-0 z-30 flex justify-between items-center">
+          <Logo height="60" width="60" />
+          <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-white hover:bg-white/20 transition-all duration-300 cursor-pointer">
+            Continue to site
+          </div>
+        </div>
+        <img
+          src={Banner}
+          alt="auth"
+          className="w-full object-cover"
+        />
+      </div>
+
+      {/* Form section */}
+      <div className="h-full w-full px-4 md:px-10 flex flex-col flex-1 relative z-10">
         <div className="flex flex-col gap-4 justify-center items-center h-full w-full">
-          {/* Updated the heading here */}
-          <h2 className="text-3xl font-bold text-white mb-4">Create Your AI-Powered Account</h2>
+          <h2 className="text-3xl font-bold bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] text-transparent bg-clip-text mb-4">Create Your AI-Powered Account</h2>
           <form
             onSubmit={handleSubmit(handleRegisterSubmit)}
-            className="flex flex-col gap-6 w-full px-4 md:px-10" // Adjusted gap to match Login
+            className="flex flex-col gap-6 w-full px-4 md:px-10 bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10"
           >
             <Input
               label="Name"
@@ -110,34 +104,24 @@ const Register = () => {
               type="password" // Added type="password" for visibility toggle
             />
 
-            <div className="mt-4 w-full"> {/* Added wrapper div and margin top */}
+            <div className="mt-4 w-full">
               <CommonButton
-                title="Register"
+                title="Register →"
                 onclick={handleSubmit(handleRegisterSubmit)}
-                classes="mt-2 w-full" // Updated classes to match Login button styling
+                classes="mt-2 w-full bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] hover:from-[#00FFB2] hover:to-[#00A3FF] text-white transition-all duration-300"
                 variant="contained"
                 type="submit"
               />
             </div>
           </form>
-          {/* Updated the link styling and text */}
-          <span className="text-white">
+          <span className="text-gray-400">
             Already have an account?{' '}
-            <Link to="/login" className="text-primary">
+            <Link to="/login" className="text-[#00A3FF] hover:text-[#00FFB2] transition-colors font-medium">
               Login here
             </Link>
           </span>
         </div>
       </div>
-
-      {/* Removed the old image section */}
-      {/* <div className="hidden md:flex h-screen">
-        <img
-          src={Heroimg}
-          alt="hero section"
-          className="w-full h-full object-cover object-left"
-        />
-      </div> */}
     </div>
   )
 }
