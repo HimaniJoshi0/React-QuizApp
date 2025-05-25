@@ -1,9 +1,11 @@
 import React from "react";
 import CommonButton from "../components/button";
+import { useNavigate } from "react-router";
 
 const HeroSection = () => {
+  const navigate = useNavigate();
   const getstarted = () => {
-    console.log("onclick");
+    navigate("/quiz");
   };
 
   return (
@@ -24,8 +26,10 @@ const HeroSection = () => {
         </div>
 
         <h1 className="text-[48px] md:text-[80px] lg:text-[120px] leading-none font-bold text-primary mb-6 relative animate-slide-up">
-          <span className="bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] text-transparent bg-clip-text">QUIZ</span>
-          <span className="text-white">BOT</span>
+          <span className="bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] text-transparent bg-clip-text">
+            QUIZ
+          </span>
+          <span className="text-white">AI</span>
           <div className="absolute -top-4 -right-4 w-8 h-8 border-2 border-[#00A3FF] rounded-full animate-ping opacity-75" />
         </h1>
 

@@ -37,7 +37,7 @@ const Navbar = () => {
     <>
       <div className="bg-[#0A0F1C]/80 backdrop-blur-md text-gray-300 w-full p-3 text-center border-b border-white/5">
         <span className="bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] text-transparent bg-clip-text font-medium">
-          New: QuizBot can now generate questions from images!
+          New: Quiz AI can now generate questions from images!
         </span>
       </div>
       <div className="sticky top-0 z-50 bg-[#0A0F1C]/80 backdrop-blur-lg border-b border-white/10">

@@ -5,7 +5,7 @@ export const Navdata = [
     },
     {
         title: "Features",
-        link: "/about"
+        link: "/features"
     },
     {
         title: "Create Quiz",

@@ -5,7 +5,7 @@ const Testimonials = () => {
     {
       name: "Sarah Johnson",
       role: "University Student",
-      content: "QuizBot has revolutionized my study routine. The AI-generated questions are incredibly relevant and help me understand concepts better.",
+      content: "QuizAI has revolutionized my study routine. The AI-generated questions are incredibly relevant and help me understand concepts better.",
       rating: 5,
       avatar: "🎓"
     },

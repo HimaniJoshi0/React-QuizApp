@@ -61,7 +61,7 @@ const Characteristics = () => {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-[#00A3FF] font-medium tracking-wider uppercase mb-2 animate-fade-in">
-            Why Choose QuizBot
+            Why Choose QuizAI
           </h2>
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 animate-slide-up">
             Powered by Advanced

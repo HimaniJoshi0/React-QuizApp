@@ -65,9 +65,12 @@ const Login = () => {
         <div className="absolute w-full h-full top-0 left-0 bg-gradient-to-r bg-black/60 z-20"></div>
         <div className="absolute w-full p-4 top-0 left-0 z-30 flex justify-between items-center">
           <Logo height="60" width="60" />
-          <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-white hover:bg-white/20 transition-all duration-300 cursor-pointer">
+          <Link
+            to="/"
+            className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-white hover:bg-white/20 transition-all duration-300 cursor-pointer"
+          >
             Continue to site
-          </div>
+          </Link>
         </div>
         <img src={Banner} alt="auth" className="w-full object-cover" />
       </div>

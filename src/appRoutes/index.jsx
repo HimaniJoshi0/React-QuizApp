@@ -8,10 +8,11 @@ import NotFound from "../sections/NotFound";
 import AttemptQuiz from "../pages/attemptQuix";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
+import FeaturesPage from "../pages/features";
 
 const AppRoutes = () => {
   const location = useLocation();
-  const isAuthPage = ['/login', '/register'].includes(location.pathname);
+  const isAuthPage = ["/login", "/register"].includes(location.pathname);
 
   return (
     <>
@@ -21,6 +22,7 @@ const AppRoutes = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/quiz" element={<Quiz />} />
+        <Route path="/features" element={<FeaturesPage />} />
         <Route path="/quiz/:quizid" element={<AttemptQuiz />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
