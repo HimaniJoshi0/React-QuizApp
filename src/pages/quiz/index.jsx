@@ -19,7 +19,7 @@ const Quiz = () => {
     try {
       const resp = await apiRequest({
         method: 'GET',
-        path: 'api/quizz',
+        path: '/quiz',
       })
       setAllQuizz(resp.data)
       setLoading(false)

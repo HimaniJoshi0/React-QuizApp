@@ -35,7 +35,7 @@ const Register = () => {
     try {
       const response = await apiRequest({
         method: 'POST',
-        path: '/user/register',
+        path: '/auth/register',
         data,
       })
       console.log('Registration Success:', response)

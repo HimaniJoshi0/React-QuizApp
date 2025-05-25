@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { apiRequest } from "../api";
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import CancelIcon from '@mui/icons-material/Cancel';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
-import RefreshIcon from '@mui/icons-material/Refresh';
-import ExploreIcon from '@mui/icons-material/Explore';
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CancelIcon from "@mui/icons-material/Cancel";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import ExploreIcon from "@mui/icons-material/Explore";
 
 const AttemptQuiz = () => {
   const { quizid } = useParams();
@@ -21,7 +21,7 @@ const AttemptQuiz = () => {
     try {
       const resp = await apiRequest({
         method: "GET",
-        path: `api/quizz?id=${quizid}`,
+        path: `/quiz?id=${quizid}`,
       });
       setQuizData(resp.data);
     } catch (error) {
@@ -61,15 +61,17 @@ const AttemptQuiz = () => {
             <div
               key={option.id}
               onClick={() => optionChange(item.id, index)}
-              className={`flex items-center p-4 rounded-lg transition-all duration-300 cursor-pointer ${checkAnswers
-                ? option.isCorrect
-                  ? "bg-green-500/10 border border-green-500/30"
+              className={`flex items-center p-4 rounded-lg transition-all duration-300 cursor-pointer ${
+                checkAnswers
+                  ? option.isCorrect
+                    ? "bg-green-500/10 border border-green-500/30"
+                    : selectedAnswers[item.id] === index
+                    ? "bg-red-500/10 border border-red-500/30"
+                    : "bg-white/5 border border-white/10"
                   : selectedAnswers[item.id] === index
-                  ? "bg-red-500/10 border border-red-500/30"
-                  : "bg-white/5 border border-white/10"
-                : selectedAnswers[item.id] === index
-                ? "bg-[#00A3FF]/10 border-[#00A3FF]/30 border"
-                : "bg-white/5 hover:bg-white/10 border border-white/10"}`}
+                  ? "bg-[#00A3FF]/10 border-[#00A3FF]/30 border"
+                  : "bg-white/5 hover:bg-white/10 border border-white/10"
+              }`}
             >
               <input
                 type="radio"
@@ -81,7 +83,11 @@ const AttemptQuiz = () => {
                 disabled={checkAnswers}
               />
               <label
-                className={`flex items-center justify-between w-full ${selectedAnswers[item.id] === index ? "text-[#00A3FF]" : "text-white/80"}`}
+                className={`flex items-center justify-between w-full ${
+                  selectedAnswers[item.id] === index
+                    ? "text-[#00A3FF]"
+                    : "text-white/80"
+                }`}
               >
                 <span className="whitespace-pre-wrap">{option.text}</span>
                 {checkAnswers ? (
@@ -92,8 +98,10 @@ const AttemptQuiz = () => {
                       <CancelIcon className="text-red-500" />
                     ) : null}
                   </span>
-                ) : selectedAnswers[item.id] === index && (
-                  <div className="w-2 h-2 rounded-full bg-[#00A3FF] ml-4" />
+                ) : (
+                  selectedAnswers[item.id] === index && (
+                    <div className="w-2 h-2 rounded-full bg-[#00A3FF] ml-4" />
+                  )
                 )}
               </label>
             </div>
@@ -128,7 +136,7 @@ const AttemptQuiz = () => {
   };
 
   const handleExplore = () => {
-    navigate('/');
+    navigate("/");
   };
 
   const ResultModal = () => (
@@ -141,12 +149,16 @@ const AttemptQuiz = () => {
         <div className="text-center relative z-10">
           {score >= 70 ? (
             <>
-              <EmojiEventsIcon sx={{ fontSize: 64 }} className="text-[#00FFB2] mb-4" />
+              <EmojiEventsIcon
+                sx={{ fontSize: 64 }}
+                className="text-[#00FFB2] mb-4"
+              />
               <h2 className="text-2xl font-bold mb-2 bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] bg-clip-text text-transparent">
                 Excellent Performance!
               </h2>
               <p className="text-white/80 mb-6">
-                You scored {score}%! Your dedication to learning shines through. Keep exploring and challenging yourself!
+                You scored {score}%! Your dedication to learning shines through.
+                Keep exploring and challenging yourself!
               </p>
               <button
                 onClick={handleExplore}
@@ -158,12 +170,16 @@ const AttemptQuiz = () => {
             </>
           ) : (
             <>
-              <SentimentVeryDissatisfiedIcon sx={{ fontSize: 64 }} className="text-[#00A3FF] mb-4" />
+              <SentimentVeryDissatisfiedIcon
+                sx={{ fontSize: 64 }}
+                className="text-[#00A3FF] mb-4"
+              />
               <h2 className="text-2xl font-bold mb-2 text-white">
                 Room for Improvement
               </h2>
               <p className="text-white/80 mb-6">
-                You scored {score}%. Don't worry! Every attempt is a step toward mastery. Would you like to try again?
+                You scored {score}%. Don't worry! Every attempt is a step toward
+                mastery. Would you like to try again?
               </p>
               <div className="space-y-3">
                 <button

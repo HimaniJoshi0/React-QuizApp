@@ -1,35 +1,35 @@
-import axios from 'axios'
-import Cookies from 'js-cookie'
+import axios from "axios";
+import Cookies from "js-cookie";
 
 // Create Axios instance
 const axiosClient = axios.create({
-  baseURL: 'https://quizzapp-ai.vercel.app', // Replace with your actual API base URL
+  baseURL: "https://quizz-be-blue.vercel.app/api", // Replace with your actual API base URL
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
   timeout: 10000,
-})
+});
 
 // Request interceptor to add token from cookies
 axiosClient.interceptors.request.use(
   (config) => {
-    const token = Cookies.get('auth_token')
+    const token = Cookies.get("auth_token");
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`
+      config.headers.Authorization = `Bearer ${token}`;
     }
-    return config
+    return config;
   },
   (error) => Promise.reject(error)
-)
+);
 
 // Response interceptor
 axiosClient.interceptors.response.use(
   (response) => response.data,
   (error) => {
-    console.error('API Error:', error.response || error.message)
-    return Promise.reject(error)
+    console.error("API Error:", error.response || error.message);
+    return Promise.reject(error);
   }
-)
+);
 
 // Generic API request handler
 export const apiRequest = async ({ method, path, data, params }) => {
@@ -39,11 +39,11 @@ export const apiRequest = async ({ method, path, data, params }) => {
       url: path,
       data,
       params,
-    })
-    return response
+    });
+    return response;
   } catch (error) {
-    throw error
+    throw error;
   }
-}
+};
 
-export default axiosClient
+export default axiosClient;

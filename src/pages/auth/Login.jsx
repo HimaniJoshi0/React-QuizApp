@@ -35,7 +35,7 @@ const Login = () => {
     try {
       const response = await apiRequest({
         method: "POST",
-        path: "/user/login",
+        path: "/auth/login",
         data,
       });
       const token = response.data?.token;
