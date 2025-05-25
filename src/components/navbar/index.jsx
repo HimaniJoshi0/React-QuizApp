@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Navdata } from '../../data'
+import { Logo } from '../../assets/icons'
+import MenuIcon from '@mui/icons-material/Menu'
+import CloseIcon from '@mui/icons-material/Close'
+import LoginIcon from '@mui/icons-material/Login'
 
 const Navbar = () => {
   const location = useLocation()
@@ -11,9 +15,7 @@ const Navbar = () => {
     <div key={index}>
       <Link
         to={item.link}
-        className={`transition-all duration-300 px-4 py-2 rounded ${
-          currentRoute === item.link ? 'bg-white/20' : ''
-        }`}
+        className={`transition-all duration-300 px-4 py-2 rounded-lg hover:bg-white/10 ${currentRoute === item.link ? 'bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] text-white' : 'text-gray-300'}`}
       >
         {item.title}
       </Link>
@@ -22,40 +24,81 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="bg-[#343C57] text-white w-full p-2 text-center">
-        QuizBot is now capable of generating questions from images within the uploaded documents
-        <br />
-        Soon you will be able to create and download INTERACTIVE SIMULATIONS on any topic, picture, video or a link
+      <div className="bg-[#0A0F1C]/80 backdrop-blur-md text-gray-300 w-full p-3 text-center border-b border-white/5">
+        <span className="bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] text-transparent bg-clip-text font-medium">
+          New: QuizBot can now generate questions from images!
+        </span>
       </div>
-      <div
-        className="py-7 px-8 flex justify-between border-b border-white/20"
-        style={{
-          backgroundImage:
-            'linear-gradient(90deg, #70ACD4, #9BBCEE, #A8CAE8, #4882E6, #245595, #70ACD4)',
-        }}
-      >
-        <div>
-          <h1>LOGO</h1>
+      <div className="sticky top-0 z-50 bg-[#0A0F1C]/80 backdrop-blur-lg border-b border-white/10">
+        <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+          <Link to="/" className="flex items-center space-x-2">
+            <Logo height="40" width="40" />
+            <span className="text-xl font-bold bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] text-transparent bg-clip-text">
+              QuizAI
+            </span>
+          </Link>
+
+          <div className="hidden md:flex items-center space-x-6">
+            {Navdata.map(renderHeader)}
+            <Link
+              to="/login"
+              className="flex items-center space-x-2 bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] hover:from-[#00FFB2] hover:to-[#00A3FF] text-white px-4 py-2 rounded-lg transition-all duration-300"
+            >
+              <LoginIcon className="w-5 h-5" />
+              <span>Login</span>
+            </Link>
+          </div>
+
+          <button
+            className="md:hidden text-white"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <MenuIcon className="w-6 h-6" />
+          </button>
         </div>
-        <div className="hidden md:flex gap-10">{Navdata.map(renderHeader)}</div>
 
-        {isMenuOpen ? (
-          <div className="absolute top-0 left-0 border-2 w-full h-screen bg-black/80 text-white backdrop-blur-md md:hidden p-4">
-            <div className="flex justify-between items-center">
-              <h1>LOGO</h1>
-              <div onClick={() => setIsMenuOpen(false)}>CROSS</div>
-            </div>
+        {/* Mobile menu */}
+        {isMenuOpen && (
+          <div className="fixed inset-0 bg-[#0A0F1C]/95 backdrop-blur-xl z-50 md:hidden">
+            <div className="flex flex-col h-full p-6">
+              <div className="flex justify-between items-center mb-8">
+                <Link to="/" className="flex items-center space-x-2" onClick={() => setIsMenuOpen(false)}>
+                  <Logo height="40" width="40" />
+                  <span className="text-xl font-bold bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] text-transparent bg-clip-text">
+                    QuizAI
+                  </span>
+                </Link>
+                <button
+                  className="text-gray-400 hover:text-white transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <CloseIcon className="w-6 h-6" />
+                </button>
+              </div>
 
-            <div className="flex justify-center items-center flex-col gap-4 w-full h-full text-white">
-              {Navdata.map(renderHeader)}
+              <div className="flex flex-col space-y-4 items-center justify-center flex-1">
+                {Navdata.map((item, index) => (
+                  <Link
+                    key={index}
+                    to={item.link}
+                    className={`text-lg transition-all duration-300 px-6 py-3 rounded-lg w-full text-center hover:bg-white/10 ${currentRoute === item.link ? 'bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] text-white' : 'text-gray-300'}`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+                <Link
+                  to="/login"
+                  className="flex items-center justify-center space-x-2 bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] hover:from-[#00FFB2] hover:to-[#00A3FF] text-white px-6 py-3 rounded-lg w-full transition-all duration-300"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <LoginIcon className="w-5 h-5" />
+                  <span>Login</span>
+                </Link>
+              </div>
             </div>
           </div>
-        ) : null}
-
-        <div className="flex md:hidden" onClick={() => setIsMenuOpen(true)}>
-          Icon
-        </div>
-        <Link to="/login">Login</Link>
+        )}
       </div>
     </>
   )
