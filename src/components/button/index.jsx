@@ -1,12 +1,25 @@
-import React from 'react'
-import { Button } from '@mui/material'
+import React from "react";
+import { Button } from "@mui/material";
 
-const CommonButton = ({ title, onclick = () => {}, classes = '', variant = 'contained', type = 'button' }) => {
+const CommonButton = ({
+  title,
+  onclick = () => {},
+  classes = "",
+  variant = "contained",
+  type = "button",
+  disabled = false,
+}) => {
   return (
-    <Button variant={variant} className={classes} onClick={onclick} type={type}>
+    <Button
+      variant={variant}
+      className={classes}
+      onClick={onclick}
+      type={type}
+      disabled={disabled}
+    >
       {title}
     </Button>
-  )
-}
+  );
+};
 
-export default CommonButton
+export default CommonButton;
